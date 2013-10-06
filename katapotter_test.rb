@@ -70,7 +70,7 @@ class KatapotterTest < Test::Unit::TestCase
 
   def test_complex_3()
     book_cart = BookCart.new [1, 1, 1, 2, 2, 3, 3, 3, 3, 4, 4, 5]
-    assert_equal 78.80, book_cart.price_after_discount
+    assert_equal 8 * 5 * 0.75 + 8 * 4 * 0.80 + 8 * 2 * 0.95 + 8, book_cart.price_after_discount
   end
 
 end
