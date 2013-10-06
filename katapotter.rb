@@ -19,7 +19,7 @@ def group_books_for_discount(books_cart, max_size)
   count_books = count_different_books books_cart
 
   #required to be sorted by number of same books to group them correctly
-  books_cart.sort! {|a, b| count_books[b] <=> count_books[a] }
+  books_cart.sort! { |a, b| count_books[b] <=> count_books[a] }
 
   while books_cart.length > 0
     next_book = books_cart.shift
