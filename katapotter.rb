@@ -1,8 +1,11 @@
-#!/usr/bin/env ruby
-
 class BookCart
 
   attr_accessor :books
+
+  BOOK_PRICE = 8
+  DISCOUNT = {0 => 0, 1 => 1, 2 => 0.95, 3 => 0.90, 4 => 0.80, 5 => 0.75}
+  MIN_DISCOUNT_GROUP_SIZE = 2
+  MAX_DISCOUNT_GROUP_SIZE = 5
 
   def initialize(books)
     @books = books
@@ -10,18 +13,13 @@ class BookCart
 
   def price_after_discount
 
-    book_price = 8
-    discount = {0 => 0, 1 => 1, 2 => 0.95, 3 => 0.90, 4 => 0.80, 5 => 0.75}
-    min_discount_size = 2
-    max_discount_size = 5
+    lower_price = @books.length * BOOK_PRICE #initialized to max possible price, in any case, result shoud be = or <
 
-    lower_price = @books.length * book_price #initialized to max possible price
-
-    (min_discount_size..max_discount_size).each do |max_size|
+    (MIN_DISCOUNT_GROUP_SIZE..MAX_DISCOUNT_GROUP_SIZE).each do |max_size|
       discount_groups = group_books_for_discount(@books.dup, max_size)
       price = 0
       discount_groups.each do |g|
-        price += book_price * g.length * discount[g.length]
+        price += BOOK_PRICE * g.length * DISCOUNT[g.length]
       end
       lower_price = price if price < lower_price
     end
@@ -31,7 +29,8 @@ class BookCart
   end
 
   private
-    def count_different_books()
+    def count_different_books
+
       diff_books = Hash.new 0
 
       @books.each do |b|
