@@ -68,5 +68,10 @@ class KatapotterTest < Test::Unit::TestCase
     assert_equal 8 * 4 * 0.80 + 4 * 8 * 0.80, price_after_discount(books)
   end
 
+  def test_complex_3()
+    books = [1, 1, 1, 2, 2, 3, 3, 3, 3, 4, 4, 5]
+    assert_equal 78.80, price_after_discount(books)
+  end
+
 end
 
