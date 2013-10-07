@@ -7,6 +7,13 @@ class BookCart
   MIN_DISCOUNT_GROUP_SIZE = 2
   MAX_DISCOUNT_GROUP_SIZE = 5
 
+  #
+  # Constructor
+  # * *Args*    :
+  #     - +books+ -> Books to be added to cart
+  # * *Raises* :
+  #     - Argument error if provided Books are not in [1,2,3,4,5]
+  #
   def initialize(books)
 
     if books.index {|b| b <= 0 || b > 5}
@@ -16,6 +23,11 @@ class BookCart
     @books = books
   end
 
+  #
+  # Method used to calculate the cart price after discount
+  # * *Returns* :
+  #     - the total price (float), including discount, for the provided cart
+  #
   def price_after_discount
 
     lower_price = @books.length * BOOK_PRICE #initialized to max possible price, in any case, result shoud be = or <
@@ -34,6 +46,12 @@ class BookCart
   end
 
   private
+
+    #
+    # Method used to count number of books of each type
+    # * *Returns* :
+    #     - a Hash of with key = Book Number and value = number of books
+    #
     def count_different_books
 
       diff_books = Hash.new 0
@@ -46,6 +64,14 @@ class BookCart
 
     end
 
+    #
+    # Method used to group books for discount
+    # * *Args*    :
+    #     - +books+ -> Books Array to use for grouping discount purpose
+    #     - +max_size+ -> Maximum size for a books group
+    # * *Returns* :
+    #     - an array of books group, for ex. [[1,2,3,4], [1,5,2]]
+    #
     def group_books_for_discount(books, max_size)
 
       books_gathered_for_discount = []
