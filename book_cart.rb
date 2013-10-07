@@ -8,6 +8,11 @@ class BookCart
   MAX_DISCOUNT_GROUP_SIZE = 5
 
   def initialize(books)
+
+    if books.index {|b| b <= 0 || b > 5}
+      raise ArgumentError.new 'None of these books has ever been written!!'
+    end
+
     @books = books
   end
 

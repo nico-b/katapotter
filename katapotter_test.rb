@@ -1,7 +1,18 @@
 require 'test/unit'
-require_relative 'katapotter'
+require_relative 'book_cart'
 
 class KatapotterTest < Test::Unit::TestCase
+
+  def test_invalid_books()
+    exception = assert_raise(ArgumentError) {BookCart.new [0,1,2,3]}
+    assert_equal 'None of these books has ever been written!!', exception.message
+
+    exception = assert_raise(ArgumentError) {BookCart.new [1,2,3,-2,5]}
+    assert_equal 'None of these books has ever been written!!', exception.message
+
+    exception = assert_raise(ArgumentError) {BookCart.new [1,2,3,8,1,5]}
+    assert_equal 'None of these books has ever been written!!', exception.message
+  end
 
   def test_with_0_tome()
     book_cart = BookCart.new []
